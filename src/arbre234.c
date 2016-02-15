@@ -45,21 +45,19 @@ bool recherche2(Arbre *a, int cle) {
 	Arbre_list *filsCourant;
 	Int_list *cleCourante;
 
-	int place = 0 ;
+	int place = 0;
 	int i;
 
 	if (a == NULL)
 		return false;
 
-
 	if (estPresentDansLesCles(a->cles, cle))
-			return true;
+		return true;
 
-	if ( a->fils == NULL)
+	if (a->fils == NULL)
 		return false;
 
-
-	cleCourante = a-> cles;
+	cleCourante = a->cles;
 
 	while (cleCourante != NULL && cleCourante->cle <= cle) {
 		cleCourante = cleCourante->suivant;
@@ -84,5 +82,119 @@ bool estPresentDansLesCles(Int_list *l, int cle) {
 
 	return (courant != NULL);
 }
+
+int nbCles(Arbre *a) {
+	int nbCles = 0;
+
+	Int_list *courant = a->cles;
+	while (courant != NULL) {
+		courant = courant->suivant;
+		nbCles++;
+	}
+
+	return nbCles;
+}
+
+Arbre* insererDansArbre(Arbre *a, int cle) {
+
+	Arbre *pere;
+
+	if (a == NULL) {
+		a = (Arbre *) malloc(sizeof(Arbre));
+
+		a->cles->cle;
+		a->cles->suivant = NULL;
+
+		a->fils = NULL;
+	} else {
+		if (nbCles( a ) == 3) {
+			pere = (Arbre *) malloc(sizeof(Arbre));
+			pere->fils->a=*a;
+			a=pere;
+		}
+
+		a=insertionDansArbreRec( a, cle);
+
+	}
+
+	return a;
+
+}
+
+Arbre* insertionDansArbreRec( Arbre *a, int cle ) {
+
+	int i = 1;
+
+	while ( i <= nbCles(a) && (cle > ))
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

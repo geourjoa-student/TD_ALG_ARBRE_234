@@ -45,7 +45,7 @@ Arbre* creerArbre ( int cle_racine);
 
 Arbre* insererDansArbre ( Arbre *a, int cle_);
 
-
+int nbCles(Arbre *a);
 
 
 /* 0 : la clé n'est pas présente

@@ -19,6 +19,7 @@ int main(void) {
 
 	printf("5 est présent : %d\n", recherche(a, 5));
 	printf("5 est présent : %d\n", recherche2(a, 5));
+	printf("%d", nbCles(a));
 
 	return EXIT_SUCCESS;
 }
