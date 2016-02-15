@@ -57,55 +57,30 @@ bool recherche(Arbre *a, int cle) {
 
 	return false;
 }
+
+bool recherche2(Arbre *a, int cle) {
+
+	int i = 0;
+
+	if (a == NULL)
+		return false;
+
+	if (estPresentDansLesCles(a->cles, a->nbCles, cle))
+		return true;
+
+	if (a->fils == NULL)
+		return false;
+
+	while (i < a->nbCles && cle < a->cles[i]) {
+		i++;
+	}
+
+	return recherche2(a->fils[i], cle);
+
+}
+
+
 /*
- bool recherche2(Arbre *a, int cle) {
-
- Arbre_list *filsCourant;
- Int_list *cleCourante;
-
- int place = 0;
- int i;
-
- if (a == NULL)
- return false;
-
- if (estPresentDansLesCles(a->cles, cle))
- return true;
-
- if (a->fils == NULL)
- return false;
-
- cleCourante = a->cles;
-
- while (cleCourante != NULL && cleCourante->cle <= cle) {
- cleCourante = cleCourante->suivant;
- place++;
- }
-
- filsCourant = a->fils;
-
- for (i = 0; i < place; ++i) {
- filsCourant = filsCourant->suivant;
- }
-
- return recherche2(&filsCourant->a, cle);
-
- }
-
-
-
- int nbCles(Arbre *a) {
- int nbCles = 0;
-
- Int_list *courant = a->cles;
- while (courant != NULL) {
- courant = courant->suivant;
- nbCles++;
- }
-
- return nbCles;
- }
-
  Arbre* insererDansArbre(Arbre *a, int cle) {
 
  Arbre *pere;

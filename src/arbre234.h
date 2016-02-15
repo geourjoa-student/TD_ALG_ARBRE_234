@@ -43,7 +43,6 @@ Arbre* creerArbre ( int cle_racine);
 
 Arbre* insererDansArbre ( Arbre *a, int cle_);
 
-int nbCles(Arbre *a);
 
 
 /* 0 : la clé n'est pas présente
@@ -55,6 +54,6 @@ bool recherche ( Arbre *a, int cle );
 /*
  * Cette fonction de recherche se veut plus intélligente en ne parcourant par des sous-arbres inutilement
  */
-//bool recherche2 ( Arbre *a, int cle );
+bool recherche2 ( Arbre *a, int cle );
 
 #endif /* ARBRE234_H_ */
