@@ -41,9 +41,7 @@ struct Arbre
 
 Arbre* creerArbre ( int cle_racine);
 
-Arbre* insererDansArbre ( Arbre *a, int cle_);
-
-
+Arbre* insererDansArbre ( Arbre *a, int cle);
 
 /* 0 : la clé n'est pas présente
  * !=0 : la clé est présente
