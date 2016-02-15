@@ -10,9 +10,14 @@
 
 
 /* Définition de type */
+#define NB_MAX_CLES 3
+#define NB_MAX_FILS 4
+
 typedef int bool;
 #define true 1
 #define false 0
+
+
 
 typedef struct Int_list Int_list;
 typedef struct Arbre_list Arbre_list;
@@ -20,21 +25,14 @@ typedef struct Arbre_list Arbre_list;
 typedef struct Arbre Arbre;
 struct Arbre
 {
-    Int_list *cles;
-    Arbre_list *fils;
+    int cles[NB_MAX_CLES];
+    Arbre* fils[NB_MAX_FILS];
+    int nbCles;
+    int nbFils;
+
 };
 
 
-struct Int_list {
-	int cle;
-	Int_list *suivant;
-};
-
-
-struct Arbre_list {
-	Arbre a;
-	Arbre_list *suivant;
-};
 
 
 
@@ -57,6 +55,6 @@ bool recherche ( Arbre *a, int cle );
 /*
  * Cette fonction de recherche se veut plus intélligente en ne parcourant par des sous-arbres inutilement
  */
-bool recherche2 ( Arbre *a, int cle );
+//bool recherche2 ( Arbre *a, int cle );
 
 #endif /* ARBRE234_H_ */
