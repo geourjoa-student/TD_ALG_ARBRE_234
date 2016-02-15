@@ -40,6 +40,42 @@ bool recherche(Arbre *a, int cle) {
 
 }
 
+bool recherche2(Arbre *a, int cle) {
+
+	Arbre_list *filsCourant;
+	Int_list *cleCourante;
+
+	int place = 0 ;
+	int i;
+
+	if (a == NULL)
+		return false;
+
+
+	if (estPresentDansLesCles(a->cles, cle))
+			return true;
+
+	if ( a->fils == NULL)
+		return false;
+
+
+	cleCourante = a-> cles;
+
+	while (cleCourante != NULL && cleCourante->cle <= cle) {
+		cleCourante = cleCourante->suivant;
+		place++;
+	}
+
+	filsCourant = a->fils;
+
+	for (i = 0; i < place; ++i) {
+		filsCourant = filsCourant->suivant;
+	}
+
+	return recherche2(&filsCourant->a, cle);
+
+}
+
 bool estPresentDansLesCles(Int_list *l, int cle) {
 	Int_list *courant = l;
 	while (courant != NULL && courant->cle != cle) {
@@ -48,4 +84,5 @@ bool estPresentDansLesCles(Int_list *l, int cle) {
 
 	return (courant != NULL);
 }
+
 

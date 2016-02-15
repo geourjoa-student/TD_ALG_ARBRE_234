@@ -43,10 +43,20 @@ struct Arbre_list {
 
 Arbre* creerArbre ( int cle_racine);
 
+Arbre* insererDansArbre ( Arbre *a, int cle_);
+
+
+
 
 /* 0 : la clé n'est pas présente
  * !=0 : la clé est présente
+ * Cette fonction de recherche est très simpliste et ne tire pas partie des propriétés des arbres 2-4.
  */
 bool recherche ( Arbre *a, int cle );
+
+/*
+ * Cette fonction de recherche se veut plus intélligente en ne parcourant par des sous-arbres inutilement
+ */
+bool recherche2 ( Arbre *a, int cle );
 
 #endif /* ARBRE234_H_ */

@@ -15,9 +15,10 @@
 int main(void) {
 
 
-	Arbre *a = creerArbre(6);
+	Arbre *a = creerArbre(5);
 
-	printf("5 est présent : %d", recherche(a, 5));
+	printf("5 est présent : %d\n", recherche(a, 5));
+	printf("5 est présent : %d\n", recherche2(a, 5));
 
 	return EXIT_SUCCESS;
 }
