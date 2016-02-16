@@ -9,24 +9,6 @@
 #include <stdlib.h>
 #include "arbre234.h"
 
-Arbre* creerArbre(int cle_racine) {
-	Arbre *a = (Arbre *) malloc(sizeof(Arbre));
-
-	a->cles[0] = cle_racine;
-	a->cles[1] = NULL;
-	a->cles[2] = NULL;
-
-	a->nbCles = 1;
-
-	a->nbFils = 0;
-
-	int i;
-	for (i = 0; i < NB_MAX_FILS; ++i) {
-		a->fils[i] = NULL;
-	}
-
-	return a;
-}
 
 bool estPresentDansLesCles(int cles[], int nbCles, int cle) {
 
@@ -50,7 +32,7 @@ bool recherche(Arbre *a, int cle) {
 		return true;
 
 	int i;
-	for (i = 0; i < a->nbFils; ++i) {
+	for (i = 0; i <= a->nbCles; ++i) {
 		if (recherche(a->fils[i], cle))
 			return true;
 	}
@@ -68,10 +50,7 @@ bool recherche2(Arbre *a, int cle) {
 	if (estPresentDansLesCles(a->cles, a->nbCles, cle))
 		return true;
 
-	if (a->fils == NULL)
-		return false;
-
-	while (i < a->nbCles && cle < a->cles[i]) {
+	while (i < a->nbCles && cle >= a->cles[i]) {
 		i++;
 	}
 
@@ -86,27 +65,27 @@ Arbre* eclatement(Arbre *a, int i){
 
 	Arbre *t = (Arbre *) malloc(sizeof(Arbre));
 
-	t->cles[0]=a->fils[i]->cles[3];
+	t->cles[0]=a->fils[i]->cles[2];
 	t->cles[1]=NULL;
 	t->cles[2]=NULL;
 
 
-	t->fils[0]=a->fils[i]->fils[3];
-	t->fils[1]=a->fils[i]->fils[4];
+	t->fils[0]=a->fils[i]->fils[2];
+	t->fils[1]=a->fils[i]->fils[3];
 	t->fils[2]=NULL;
 	t->fils[3]=NULL;
 
 	t->nbCles=1;
 	t->nbFils=2;
 
-	a->fils[i+1]=t;
+	a->fils[i+1]=t; //TODO +1 ?
 
 	a->fils[i]->nbCles=1;
 
 	// TODO Attention indice
-	for (j = a->nbCles; j < i; ++j) {
-		a->cles[i]=a->cles[i-1];
-		a->fils[j+1]=a->fils[i];
+	for (j = a->nbCles; j != i; --j) {
+		a->cles[j]=a->cles[j-1];
+		a->fils[j+1]=a->fils[j];
 	}
 
 	a->cles[i]=a->fils[i]->cles[1];
@@ -126,16 +105,18 @@ Arbre* insertionDansArbreRec(Arbre *a, int cle) {
 		i++;
 	}
 
-	if ( !((i<=a->nbCles) && (cle == a->cles[i]))) {
+	if ( !((i<a->nbCles) && (cle == a->cles[i]))) {
+
 		if (a->fils[0]==NULL) {
-			for (j = a->nbCles-1; j >= i; --j){ // TODO Pas sûr du -1
-				a->cles[j+1]=a->cles[i];
+
+			for (j = a->nbCles; j != i; --j){ // TODO Pas sûr du -1
+				a->cles[j]=a->cles[j-1];
 			}
 
 			a->nbCles++;
 
-			// TODO Inutile ?
-			//a->fils[3] = NULL;
+			// TODO Correct ?
+			a->fils[a->nbCles] = NULL;
 
 			a->cles[i]=cle;
 
@@ -147,7 +128,7 @@ Arbre* insertionDansArbreRec(Arbre *a, int cle) {
 					i++;
 				}
 			}
-			if( !(i<=a->nbCles ) && cle==a->cles[i]){
+			if( !(i<a->nbCles  && cle==a->cles[i])){
 				a=insertionDansArbreRec(a->fils[i], cle);
 			}
 		}
@@ -178,7 +159,19 @@ Arbre* insererDansArbre(Arbre *a, int cle) {
 	} else {
 		if (a->nbCles == 3) {
 			pere = (Arbre *) malloc(sizeof(Arbre));
+
+			int i;
+			for (i = 0; i < NB_MAX_CLES; ++i) {
+				pere->cles[i]=NULL;
+
+			}
+
+			for (i = 1; i < NB_MAX_FILS; ++i) {
+				pere->fils[i] = NULL;
+			}
+
 			pere->nbCles = 0;
+			pere->nbFils = 1;
 			pere->fils[0] = a;
 
 			a = pere;
